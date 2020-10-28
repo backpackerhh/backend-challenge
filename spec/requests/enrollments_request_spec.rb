@@ -28,9 +28,7 @@ RSpec.describe 'Enrollments', type: :request do
   describe '#create' do
     let(:course) { create(:course) }
     let(:teacher) { create(:teacher) }
-    let(:params) do
-      { enrollment: { course_id: course.id, teacher_id: teacher.id } }
-    end
+    let(:params) { { enrollment: { course_id: course.id, teacher_id: teacher.id } } }
 
     it 'creates new instance of enrollment' do
       expect(EnrollmentForm).to receive(:new).with(instance_of(Enrollment)).and_call_original
@@ -41,7 +39,13 @@ RSpec.describe 'Enrollments', type: :request do
     it 'displays flash message when record is successfully created' do
       post enrollments_path, params: params
 
-      expect(flash[:notice]).to match('Enrollment was successfully created.')
+      expect(flash[:notice]).to match('Enrollment was successfully created')
+    end
+
+    it 'redirects user to expected URL' do
+      post enrollments_path, params: params
+
+      expect(response).to redirect_to(enrollments_url)
     end
   end
 end

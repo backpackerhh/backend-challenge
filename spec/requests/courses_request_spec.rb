@@ -26,16 +26,54 @@ RSpec.describe 'Courses', type: :request do
   end
 
   describe '#create' do
+    let(:course_params) { { course: { title: 'Basic Ruby' } } }
+
     it 'creates new instance of course' do
       expect(CourseForm).to receive(:new).with(instance_of(Course)).and_call_original
 
-      post courses_path, params: { course: { title: 'Basic Ruby' } }
+      post courses_path, params: course_params
     end
 
     it 'displays flash message when record is successfully created' do
-      post courses_path, params: { course: { title: 'Basic Ruby' } }
+      post courses_path, params: course_params
 
-      expect(flash[:notice]).to match('Course was successfully created.')
+      expect(flash[:notice]).to match('Course was successfully created')
+    end
+
+    it 'redirects user to expected URL' do
+      post courses_path, params: course_params
+
+      expect(response).to redirect_to(courses_url)
+    end
+  end
+
+  describe '#vote' do
+    let(:course) { create(:course) }
+
+    it 'displays flash message when course is successfully upvoted' do
+      create(:teacher) # FIXME: temp record until we have a current user
+
+      post vote_course_path(course.id)
+
+      expect(flash[:notice]).to match('Your vote has been successfully registered')
+    end
+
+    it 'displays flash message when course has been already upvoted' do
+      teacher = create(:teacher) # FIXME: temp record until we have a current user
+
+      course.liked_by teacher
+
+      post vote_course_path(course.id)
+
+      expect(flash[:alert]).to match('You already voted for that course')
+    end
+
+    it 'redirects user to expected URL' do
+      create(:teacher) # FIXME: temp record until we have a current user
+
+      post vote_course_path(course.id)
+
+      expect(response).to redirect_to(courses_url)
     end
   end
 end

@@ -1,3 +1,11 @@
-<td>
-  <%= course.title %>
-</td>
+<tr>
+  <td>
+    <%= course.title %>
+  </td>
+  <td>
+    <%= course.get_up_votes.size %>
+  </td>
+  <td>
+    <%= button_to 'Vote', vote_course_path(course) %>
+  </td>
+</tr>

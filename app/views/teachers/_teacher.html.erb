@@ -1,3 +1,11 @@
-<td>
-  <%= teacher.email %>
-</td>
+<tr>
+  <td>
+    <%= teacher.email %>
+  </td>
+  <td>
+    <%= teacher.get_up_votes.size %>
+  </td>
+  <td>
+    <%= button_to 'Vote', vote_teacher_path(teacher) %>
+  </td>
+</tr>

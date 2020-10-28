@@ -19,6 +19,12 @@ class TeachersController < ApplicationController
     end
   end
 
+  def vote
+    teacher = Teacher.find(params[:id])
+
+    register_vote_if_possible_for teacher, redirect_to: teachers_url
+  end
+
   private
 
   def teacher_params

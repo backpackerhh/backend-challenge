@@ -19,6 +19,12 @@ class CoursesController < ApplicationController
     end
   end
 
+  def vote
+    course = Course.find(params[:id])
+
+    register_vote_if_possible_for course, redirect_to: courses_url
+  end
+
   private
 
   def course_params

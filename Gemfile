@@ -19,6 +19,9 @@ gem 'webpacker', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+# Votes
+gem 'acts_as_votable'
+
 group :development, :test do
   gem 'capybara'
   gem 'factory_bot_rails'
