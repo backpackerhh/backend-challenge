@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Teacher < ApplicationRecord
+  devise :database_authenticatable, :registerable
+
   acts_as_votable cacheable_strategy: :update_columns
   acts_as_voter
 
@@ -13,11 +15,12 @@ end
 #
 # Table name: teachers
 #
-#  id              :integer          not null, primary key
-#  cached_votes_up :integer          default(0)
-#  email           :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                 :integer          not null, primary key
+#  cached_votes_up    :integer          default(0)
+#  email              :string
+#  encrypted_password :string           default(""), not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
 #
 # Indexes
 #

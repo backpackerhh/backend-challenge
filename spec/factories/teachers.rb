@@ -5,6 +5,7 @@ FactoryBot.define do
     sequence :email do |n|
       "person#{n}@example.com"
     end
+    password { '123456' }
   end
 end
 
@@ -12,11 +13,12 @@ end
 #
 # Table name: teachers
 #
-#  id              :integer          not null, primary key
-#  cached_votes_up :integer          default(0)
-#  email           :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                 :integer          not null, primary key
+#  cached_votes_up    :integer          default(0)
+#  email              :string
+#  encrypted_password :string           default(""), not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
 #
 # Indexes
 #

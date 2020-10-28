@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   def register_vote_if_possible_for(resource, redirect_to:)
-    resource.liked_by Teacher.first
+    resource.liked_by current_teacher
 
     url = redirect_to
     message = if resource.vote_registered?

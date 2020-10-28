@@ -49,18 +49,19 @@ RSpec.describe 'Courses', type: :request do
 
   describe '#vote' do
     let(:course) { create(:course) }
+    let(:teacher) { create(:teacher) }
+
+    before do
+      sign_in teacher
+    end
 
     it 'displays flash message when course is successfully upvoted' do
-      create(:teacher) # FIXME: temp record until we have a current user
-
       post vote_course_path(course.id)
 
       expect(flash[:notice]).to match('Your vote has been successfully registered')
     end
 
     it 'displays flash message when course has been already upvoted' do
-      teacher = create(:teacher) # FIXME: temp record until we have a current user
-
       course.liked_by teacher
 
       post vote_course_path(course.id)
@@ -69,8 +70,6 @@ RSpec.describe 'Courses', type: :request do
     end
 
     it 'redirects user to expected URL' do
-      create(:teacher) # FIXME: temp record until we have a current user
-
       post vote_course_path(course.id)
 
       expect(response).to redirect_to(courses_url)

@@ -11,7 +11,7 @@
 
   <body>
     <header>
-      <h1>Enrollments Platform</h1>
+      <h1><%= link_to 'Enrollments Platform', root_path %></h1>
 
       <nav>
         <ul>
@@ -19,6 +19,8 @@
           <li><%= link_to_unless_current 'Courses', courses_path %></li>
           <li><%= link_to_unless_current 'Teachers', teachers_path %></li>
         </ul>
+
+        <%= render 'shared/user_actions' %>
       </nav>
     </header>
 

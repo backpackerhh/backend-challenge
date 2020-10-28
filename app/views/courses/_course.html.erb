@@ -4,6 +4,6 @@
     <small><b>(<%= pluralize(course.cached_votes_up, 'vote') %>)</b></small>
   </td>
   <td>
-    <%= button_to 'Vote', vote_course_path(course) %>
+    <%= button_to 'Vote', vote_course_path(course) if teacher_signed_in? %>
   </td>
 </tr>

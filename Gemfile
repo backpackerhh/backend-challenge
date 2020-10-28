@@ -13,6 +13,9 @@ gem 'sqlite3', '~> 1.4'
 # App server
 gem 'puma', '~> 4.1'
 
+# Authentication
+gem 'devise'
+
 # JavaScript
 gem 'webpacker', '~> 4.0'
 

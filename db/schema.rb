@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_220223) do
+ActiveRecord::Schema.define(version: 2020_10_28_220238) do
 
   create_table "courses", force: :cascade do |t|
     t.string "title"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_10_28_220223) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "cached_votes_up", default: 0
+    t.string "encrypted_password", default: "", null: false
     t.index ["email"], name: "index_teachers_on_email", unique: true
   end
 
