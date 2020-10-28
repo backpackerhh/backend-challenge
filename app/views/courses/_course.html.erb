@@ -1,9 +1,7 @@
 <tr>
   <td>
     <%= course.title %>
-  </td>
-  <td>
-    <%= course.get_up_votes.size %>
+    <small><b>(<%= pluralize(course.cached_votes_up, 'vote') %>)</b></small>
   </td>
   <td>
     <%= button_to 'Vote', vote_course_path(course) %>

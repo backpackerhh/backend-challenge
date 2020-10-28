@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_201345) do
+ActiveRecord::Schema.define(version: 2020_10_28_220223) do
 
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "cached_votes_up", default: 0
     t.index ["title"], name: "index_courses_on_title", unique: true
   end
 
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_10_28_201345) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "cached_votes_up", default: 0
     t.index ["email"], name: "index_teachers_on_email", unique: true
   end
 

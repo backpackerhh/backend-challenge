@@ -18,5 +18,7 @@ RSpec.describe Enrollment, type: :model do
   end
 
   it { is_expected.to delegate_method(:title).to(:course).with_prefix }
+  it { is_expected.to delegate_method(:cached_votes_up).to(:course).with_prefix }
   it { is_expected.to delegate_method(:email).to(:teacher).with_prefix }
+  it { is_expected.to delegate_method(:cached_votes_up).to(:teacher).with_prefix }
 end

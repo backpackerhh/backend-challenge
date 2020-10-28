@@ -1,9 +1,7 @@
 <tr>
   <td>
     <%= teacher.email %>
-  </td>
-  <td>
-    <%= teacher.get_up_votes.size %>
+    <small><b>(<%= pluralize(teacher.cached_votes_up, 'vote') %>)</b></small>
   </td>
   <td>
     <%= button_to 'Vote', vote_teacher_path(teacher) %>
