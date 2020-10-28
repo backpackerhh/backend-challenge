@@ -10,13 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_181642) do
+ActiveRecord::Schema.define(version: 2020_10_28_184741) do
 
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["title"], name: "index_courses_on_title", unique: true
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.integer "teacher_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index "\"course\"", name: "index_enrollments_on_course"
+    t.index "\"teacher\"", name: "index_enrollments_on_teacher"
+    t.index ["course_id", "teacher_id"], name: "index_enrollments_on_course_id_and_teacher_id", unique: true
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["teacher_id"], name: "index_enrollments_on_teacher_id"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -26,4 +38,6 @@ ActiveRecord::Schema.define(version: 2020_10_28_181642) do
     t.index ["email"], name: "index_teachers_on_email", unique: true
   end
 
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "teachers"
 end
