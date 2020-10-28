@@ -1,0 +1,10 @@
+<%= form_for @form.course do |f| %>
+  <%= render 'shared/error_messages', resource: @form.course if @form.errors.any? %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= button_tag 'Save', type: 'submit' %>
+<% end %>
+
+<%= link_to 'Back to Courses', courses_path %>

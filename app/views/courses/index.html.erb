@@ -1,0 +1,16 @@
+<h1>Courses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <%= render @dashboard.courses %>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'New course', new_course_path %>
