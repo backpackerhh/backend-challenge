@@ -65,6 +65,8 @@ Layout/HashAlignment:
   EnforcedHashRocketStyle: key
   EnforcedColonStyle: key
   EnforcedLastArgumentHashStyle: always_inspect
+  Exclude:
+    - lib/tasks/**/*
 
 Layout/BlockAlignment:
   Enabled: true
