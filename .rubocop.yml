@@ -139,6 +139,8 @@ Layout/ExtraSpacing:
   AllowForAlignment: false
   AllowBeforeTrailingComments: false
   ForceEqualSignAlignment: false
+  Exclude:
+    - Guardfile
 
 Layout/AssignmentIndentation:
   Enabled: true
