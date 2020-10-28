@@ -6,4 +6,7 @@ class Enrollment < ApplicationRecord
 
   validates :course_id, presence: true, uniqueness: { scope: :teacher_id }
   validates :teacher_id, presence: true
+
+  delegate :title, to: :course, prefix: true
+  delegate :email, to: :teacher, prefix: true
 end

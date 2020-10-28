@@ -16,4 +16,7 @@ RSpec.describe Enrollment, type: :model do
 
     expect(enrollment).to validate_uniqueness_of(:course_id).scoped_to :teacher_id
   end
+
+  it { is_expected.to delegate_method(:title).to(:course).with_prefix }
+  it { is_expected.to delegate_method(:email).to(:teacher).with_prefix }
 end

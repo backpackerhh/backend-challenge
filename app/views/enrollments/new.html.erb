@@ -1,0 +1,13 @@
+<%= form_for @form.enrollment do |f| %>
+  <%= render 'shared/error_messages', resource: @form.enrollment if @form.errors.any? %>
+
+  <%= f.label :course_id %>
+  <%= f.collection_select :course_id, @form.courses, :id, :title, include_blank: true %>
+
+  <%= f.label :teacher_id %>
+  <%= f.collection_select :teacher_id, @form.teachers, :id, :email, include_blank: true %>
+
+  <%= button_tag 'Save', type: 'submit' %>
+<% end %>
+
+<%= link_to 'Back to Enrollments', enrollments_path %>
