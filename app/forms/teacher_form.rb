@@ -11,52 +11,52 @@
 # With this solution the validation logic remains in the original models where it should be.
 # Additional validations can be added to the form object itself to verify the validity of the
 # objects as a group.
-class CourseForm
+class TeacherForm
   # This module includes model name introspections, conversions, translations and validations.
   # Besides that, it allows us to initialize the object with a hash of attributes.
   include ActiveModel::Model
 
-  attr_reader :course
+  attr_reader :teacher
 
   # Returns the attributes of the model, including the name of its associations
   #
   # @return [Array] attributes of the model and name of its associations
-  def self.course_attributes
-    ::Course.column_names + ::Course.reflections.keys
+  def self.teacher_attributes
+    ::Teacher.column_names + ::Teacher.reflections.keys
   end
 
   # Used to retrieve all kinds of naming-related information
   #
   # @see {ActiveModel::Name}
   def self.model_name
-    ActiveModel::Name.new(self, nil, 'Course')
+    ActiveModel::Name.new(self, nil, 'Teacher')
   end
 
   # Delegates getter and setter methods for each of the attributes back to the original model
-  course_attributes.each do |attr|
-    delegate attr, "#{attr}=", to: :course
+  teacher_attributes.each do |attr|
+    delegate attr, "#{attr}=", to: :teacher
   end
 
-  def initialize(course)
-    @course = course
+  def initialize(teacher)
+    @teacher = teacher
   end
 
   # Sends the form with values filled by user
   #
-  # When the form and the course are both valid, the record is saved. Otherwise, the form displays
-  # all errors found in validation process.
+  # When the form and the teacher are both valid, the record is saved. Otherwise, the form
+  # displays all errors found in validation process.
   #
   # @param [Hash] params - form's attributes and its values
   #
-  # @return [Boolean] true when course is saved, false otherwise
+  # @return [Boolean] true when teacher is saved, false otherwise
   def submit(params)
     preload_fields_with(params)
 
     if completely_valid?
-      course.save!
+      teacher.save!
       true
     else
-      promote_errors(course.errors)
+      promote_errors(teacher.errors)
       false
     end
   end
@@ -72,7 +72,7 @@ class CourseForm
     end
   end
 
-  # Performs the validation of both, the form itself and the course
+  # Performs the validation of both, the form itself and the teacher
   #
   # In the case of the form, validates those fields that are exclusive to it.
   #
@@ -80,18 +80,18 @@ class CourseForm
   # If the variable is replaced with a direct validation check, the code does not work because the
   # second validation won't be performed if the result of the first one is false.
   #
-  # @return [Boolean] true when form and course are valid, false otherwise
+  # @return [Boolean] true when form and teacher are valid, false otherwise
   def completely_valid?
-    course_valid = course.valid?
-    valid? && course_valid
+    teacher_valid = teacher.valid?
+    valid? && teacher_valid
   end
 
-  # Takes all given validation errors found in course and adds them to errors of the form itself.
+  # Takes all given validation errors found in teacher and adds them to errors of the form itself.
   # These errors correspond with delegated attributes on the form object, that will be rendered as
   # form fields in the view. Since the attributes match, Simple Form will be able to handle the
   # display of errors in the form the way it normally would.
   #
-  # @param [ActiveModel::Errors] child_errors - validation errors found in course
+  # @param [ActiveModel::Errors] child_errors - validation errors found in teacher
   def promote_errors(child_errors)
     child_errors.each do |attribute, message|
       errors.add(attribute, message)

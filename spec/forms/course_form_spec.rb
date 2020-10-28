@@ -15,9 +15,7 @@ RSpec.describe CourseForm, type: :form do
 
   describe '#submit(params)' do
     let(:valid_params) do
-      {
-        title: 'Basic Ruby'
-      }
+      { title: 'Basic Ruby' }
     end
 
     let(:invalid_params) do
