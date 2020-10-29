@@ -66,10 +66,30 @@ RSpec.describe 'Courses', type: :request do
       sign_in teacher
     end
 
+    it 'add new vote to given course' do
+      expect {
+        post vote_course_path(course.id)
+      }.to change {
+        course.reload
+        course.cached_votes_up
+      }.from(0).to 1
+    end
+
     it 'displays flash message when course is successfully upvoted' do
       post vote_course_path(course.id)
 
       expect(flash[:notice]).to match('Your vote has been successfully registered')
+    end
+
+    it 'does not add new vote when teacher already voted for given course' do
+      course.liked_by teacher
+
+      expect {
+        post vote_course_path(course.id)
+      }.not_to(change {
+        course.reload
+        course.cached_votes_up
+      })
     end
 
     it 'displays flash message when course has been already upvoted' do

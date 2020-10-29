@@ -24,10 +24,30 @@ RSpec.describe 'Teachers', type: :request do
       sign_in teacher
     end
 
+    it 'add new vote to given teacher' do
+      expect {
+        post vote_teacher_path(teacher.id)
+      }.to change {
+        teacher.reload
+        teacher.cached_votes_up
+      }.from(0).to 1
+    end
+
     it 'displays flash message when teacher is successfully upvoted' do
       post vote_teacher_path(teacher.id)
 
       expect(flash[:notice]).to match('Your vote has been successfully registered')
+    end
+
+    it 'does not add new vote when teacher already voted for given teacher' do
+      teacher.liked_by teacher
+
+      expect {
+        post vote_teacher_path(teacher.id)
+      }.not_to(change {
+        teacher.reload
+        teacher.cached_votes_up
+      })
     end
 
     it 'displays flash message when teacher has been already upvoted' do
