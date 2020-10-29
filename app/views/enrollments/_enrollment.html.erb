@@ -1,10 +1,10 @@
 <tr>
   <td>
-    <%= inscription.course_title %>
-    <small><b>(<%= pluralize(inscription.course_cached_votes_up, 'vote') %>)</b></small>
+    <%= enrollment.course_title %>
+    <small><b>(<%= pluralize(enrollment.course_cached_votes_up, 'vote') %>)</b></small>
   </td>
   <td>
-    <%= inscription.teacher_email %>
-    <small><b>(<%= pluralize(inscription.teacher_cached_votes_up, 'vote') %>)</b></small>
+    <%= enrollment.teacher_email %>
+    <small><b>(<%= pluralize(enrollment.teacher_cached_votes_up, 'vote') %>)</b></small>
   </td>
 </tr>

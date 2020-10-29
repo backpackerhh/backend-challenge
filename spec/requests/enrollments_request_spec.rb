@@ -18,6 +18,12 @@ RSpec.describe 'Enrollments', type: :request do
   end
 
   describe '#new' do
+    let(:teacher) { create(:teacher) }
+
+    before do
+      sign_in teacher
+    end
+
     it 'creates new instance of enrollment' do
       expect(EnrollmentForm).to receive(:new).with(instance_of(Enrollment)).and_call_original
 
@@ -29,6 +35,10 @@ RSpec.describe 'Enrollments', type: :request do
     let(:course) { create(:course) }
     let(:teacher) { create(:teacher) }
     let(:params) { { enrollment: { course_id: course.id, teacher_id: teacher.id } } }
+
+    before do
+      sign_in teacher
+    end
 
     it 'creates new instance of enrollment' do
       expect(EnrollmentForm).to receive(:new).with(instance_of(Enrollment)).and_call_original
@@ -42,7 +52,7 @@ RSpec.describe 'Enrollments', type: :request do
       expect(flash[:notice]).to match('Enrollment was successfully created')
     end
 
-    it 'redirects user to expected URL' do
+    it 'redirects teacher to expected URL' do
       post enrollments_path, params: params
 
       expect(response).to redirect_to(enrollments_url)

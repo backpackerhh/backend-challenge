@@ -12,4 +12,4 @@
   </tbody>
 </table>
 
-<%= link_to 'New course', new_course_path %>
+<%= link_to 'New course', new_course_path if teacher_signed_in? %>

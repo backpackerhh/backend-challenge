@@ -38,7 +38,7 @@ RSpec.describe 'Teachers', type: :request do
       expect(flash[:alert]).to match('You already voted for that teacher')
     end
 
-    it 'redirects user to expected URL' do
+    it 'redirects teacher to expected URL' do
       post vote_teacher_path(teacher.id)
 
       expect(response).to redirect_to(teachers_url)

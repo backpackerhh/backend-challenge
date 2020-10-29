@@ -1,4 +1,4 @@
-<h1>Enrollments</h1>
+<h2>Enrollments</h2>
 
 <table>
   <thead>
@@ -12,4 +12,4 @@
   </tbody>
 </table>
 
-<%= link_to 'New enrollment', new_enrollment_path %>
+<%= link_to 'New enrollment', new_enrollment_path if teacher_signed_in? %>

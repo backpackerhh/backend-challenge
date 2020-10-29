@@ -18,6 +18,12 @@ RSpec.describe 'Courses', type: :request do
   end
 
   describe '#new' do
+    let(:teacher) { create(:teacher) }
+
+    before do
+      sign_in teacher
+    end
+
     it 'creates new instance of course' do
       expect(CourseForm).to receive(:new).with(instance_of(Course)).and_call_original
 
@@ -26,7 +32,12 @@ RSpec.describe 'Courses', type: :request do
   end
 
   describe '#create' do
+    let(:teacher) { create(:teacher) }
     let(:course_params) { { course: { title: 'Basic Ruby' } } }
+
+    before do
+      sign_in teacher
+    end
 
     it 'creates new instance of course' do
       expect(CourseForm).to receive(:new).with(instance_of(Course)).and_call_original
@@ -40,7 +51,7 @@ RSpec.describe 'Courses', type: :request do
       expect(flash[:notice]).to match('Course was successfully created')
     end
 
-    it 'redirects user to expected URL' do
+    it 'redirects teacher to expected URL' do
       post courses_path, params: course_params
 
       expect(response).to redirect_to(courses_url)
@@ -69,7 +80,7 @@ RSpec.describe 'Courses', type: :request do
       expect(flash[:alert]).to match('You already voted for that course')
     end
 
-    it 'redirects user to expected URL' do
+    it 'redirects teacher to expected URL' do
       post vote_course_path(course.id)
 
       expect(response).to redirect_to(courses_url)

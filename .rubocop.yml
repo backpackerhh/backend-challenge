@@ -381,6 +381,13 @@ Capybara/CurrentPathExpectation:
 
 Capybara/FeatureMethods:
   Enabled: true
+  EnabledMethods:
+    - background
+    - scenario
+    - xscenario
+    - given
+    - given!
+    - feature
 
 FactoryBot/AttributeDefinedStatically:
   Exclude:

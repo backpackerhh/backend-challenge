@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoursesController < ApplicationController
-  before_action :authenticate_teacher!, only: :vote
+  before_action :authenticate_teacher!, only: %i[new create vote]
 
   def index
     @dashboard = CoursesDashboard.new
