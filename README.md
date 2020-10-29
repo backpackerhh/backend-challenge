@@ -100,9 +100,10 @@ In this case, there is no commit that needed much explanation.
 
 ## TODO
 
-- I haven't added any CSS yet.
 - I haven't added a single JS line. For example, buttons meant to vote for teachers or courses could use UJS to avoid a full page reload or hide them once the teacher votes for a given resource.
 - Gracefully handle unverified requests.
 - Extract duplication from form objects.
+- Extract duplicated markup to display resources' votes.
+- Import only needed modules from Semantic UI.
 - Change the database for production environment. In development and test environments SQLite is used.
 - Deploy to production.

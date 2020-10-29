@@ -1,8 +1,11 @@
-<ul>
-  <% if teacher_signed_in? %>
-    <li><%= button_to 'Log out', destroy_teacher_session_path, method: :delete %></li>
-  <% else %>
-    <li><%= link_to_unless_current 'Log in', new_teacher_session_path %></li>
-    <li><%= link_to_unless_current 'Sign up', new_teacher_registration_path %></li>
-  <% end %>
-</ul>
+<% if teacher_signed_in? %>
+  <div class="item">
+    <%= button_to 'Log out', destroy_teacher_session_path, method: :delete, class: 'ui negative button' %>
+  </div>
+<% else %>
+  <div class="item">
+    <%= link_to 'Log in', new_teacher_session_path, class: 'ui primary button', style: 'margin-right: 10px' %>
+
+    <%= link_to 'Sign up as teacher', new_teacher_registration_path, class: 'ui button' %>
+  </div>
+<% end %>

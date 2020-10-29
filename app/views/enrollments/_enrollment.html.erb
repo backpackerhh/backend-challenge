@@ -1,10 +1,10 @@
-<tr>
+<tr class="center aligned">
   <td>
-    <%= enrollment.course_title %>
-    <small><b>(<%= pluralize(enrollment.course_cached_votes_up, 'vote') %>)</b></small>
+    <%= enrollment.course_title %><br>
+    <i class="icon thumbs up"></i> <b><%= enrollment.course_cached_votes_up %></b>
   </td>
   <td>
-    <%= enrollment.teacher_email %>
-    <small><b>(<%= pluralize(enrollment.teacher_cached_votes_up, 'vote') %>)</b></small>
+    <%= enrollment.teacher_email %><br>
+    <i class="icon thumbs up"></i> <b><%= enrollment.teacher_cached_votes_up %></b>
   </td>
 </tr>

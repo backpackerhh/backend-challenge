@@ -19,6 +19,10 @@ gem 'devise'
 # JavaScript
 gem 'webpacker', '~> 4.0'
 
+# Styles
+gem 'sassc-rails'
+gem 'semantic-ui-sass'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 

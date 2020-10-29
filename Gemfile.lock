@@ -240,6 +240,21 @@ GEM
       rubocop (~> 0.87)
       rubocop-ast (>= 0.7.1)
     ruby-progressbar (1.10.1)
+    sass (3.7.4)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
+    semantic-ui-sass (2.4.2.0)
+      sass (>= 3.2)
     shellany (0.0.1)
     shoulda-matchers (4.4.1)
       activesupport (>= 4.2.0)
@@ -257,6 +272,7 @@ GEM
     sqlite3 (1.4.2)
     thor (1.0.1)
     thread_safe (0.3.6)
+    tilt (2.0.10)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
@@ -300,6 +316,8 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rspec
+  sassc-rails
+  semantic-ui-sass
   shoulda-matchers
   simplecov
   sqlite3 (~> 1.4)

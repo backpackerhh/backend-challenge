@@ -1,9 +1,9 @@
-<tr>
+<tr class="center aligned">
   <td>
-    <%= teacher.email %>
-    <small><b>(<%= pluralize(teacher.cached_votes_up, 'vote') %>)</b></small>
+    <%= teacher.email %><br>
+    <i class="icon thumbs up"></i> <b><%= teacher.cached_votes_up %></b>
   </td>
   <td>
-    <%= button_to 'Vote', vote_teacher_path(teacher) if teacher_signed_in? %>
+    <%= button_to 'Vote', vote_teacher_path(teacher), class: 'ui primary button' if teacher_signed_in? %>
   </td>
 </tr>

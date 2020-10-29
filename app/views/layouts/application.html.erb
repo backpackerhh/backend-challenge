@@ -10,25 +10,32 @@
   </head>
 
   <body>
-    <header>
-      <h1><%= link_to 'Enrollments Platform', root_path %></h1>
+    <div class="ui container">
+      <header class="ui stackable container menu">
+        <div class="header item">
+          <h1><%= link_to 'Enrollments Platform', root_path %></h1>
+        </div>
 
-      <nav>
-        <ul>
-          <li><%= link_to_unless_current 'Enrollments', root_path %></li>
-          <li><%= link_to_unless_current 'Courses', courses_path %></li>
-          <li><%= link_to_unless_current 'Teachers', teachers_path %></li>
-        </ul>
+        <%= link_to 'Enrollments', root_path, class: 'item' %>
+        <%= link_to 'Courses', courses_path, class: 'item' %>
+        <%= link_to 'Teachers', teachers_path, class: 'item' %>
 
-        <%= render 'shared/user_actions' %>
-      </nav>
-    </header>
+        <div class="right menu">
+          <%= render 'shared/user_actions' %>
+        </div>
+      </header>
 
-    <main>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <main class="ui segment">
+        <% if notice.present? %>
+        <p class="ui positive message"><%= notice %></p>
+        <% end %>
 
-      <%= yield %>
-    </main>
+        <% if alert.present? %>
+        <p class="ui negative message"><%= alert %></p>
+        <% end %>
+
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>
