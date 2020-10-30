@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.25
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<h1 id="label-Backend+Challenge">Backend Challenge</h1>
+
+<h2 id="label-Up+and+running">Up and running</h2>
+
+<p>Download or clone the repo and run the next command in the console:</p>
+
+<pre class="code ruby"><code class="ruby">$ rails db:create db:migrate db:seed
+$ bundle exec rails s
+</code></pre>
+
+<p>If at any time JS is used via Webpacker, run the following command in another console:</p>
+
+<pre class="code ruby"><code class="ruby">$ ./bin/webpack-dev-server
+</code></pre>
+
+<p>Open the browser and visit <a href="http://localhost:3000">localhost:3000</a>.</p>
+
+<h2 id="label-Decisions">Decisions</h2>
+
+<p>From the very beginning, it seemed clear to me that an authentication system would be necessary for teachers, although the requirements specify that it was not required. I suppose it could be considered as “functional doubt not adequately described”.</p>
+
+<p>If the teacher is authenticated, we can easily guarantee their identity, thus being able to enroll in as many courses as they want and we can control their votes to teachers and courses.</p>
+
+<p>The summary of the features currently included are:</p>
+<ul><li>
+<p>Guest users (those unauthenticated) can register as a teacher, log in and view the enrollments, courses, and teachers listings with their respective number of votes.</p>
+</li><li>
+<p>In the teacher registration only an email and a password are required. Once users provide that data, they are automatically logged in. I haven&#39;t configured other authentication features such as email confirmation, remember password, etc.</p>
+</li><li>
+<p>Authenticated users can see the same that unauthenticated users do, as well as being able to enroll in courses, add new courses, and vote for teachers and courses.</p>
+</li><li>
+<p>I decided to only add the possibility of give positive votes.</p>
+</li><li>
+<p>Teachers can vote for themselves and other teachers, in addition to existing courses, but only once for each. If you try to vote a second time for the same teacher or course, a warning message will be displayed.</p>
+</li><li>
+<p>An enrollment is created for the current teacher and the selected course. The same teacher cannot enroll twice in the same course.</p>
+</li><li>
+<p>Regarding the votes, the enrollments listing only shows the number of votes for the course and the teacher. To vote, the teacher must go to the courses or teachers listing, respectively.</p>
+</li><li>
+<p>Two teachers cannot have the same email.</p>
+</li><li>
+<p>Two courses cannot have the same title.</p>
+</li><li>
+<p>Of all Rails CRUD actions, I&#39;ve implemented only the index and new/create where applicable.</p>
+</li></ul>
+
+<h2 id="label-Design+patterns">Design patterns</h2>
+
+<p>In this project where there is little complexity and few entities, some patterns that I use regularly are clearly unnecessary or some could even be said to be over-engineering, such as presenters, service objects or query objects; but still I want to show the use of some of them:</p>
+<ul><li>
+<p><strong>Façade</strong>: for <code>index</code> actions in the controllers. That way we expose a single instance variable to the view. I call them dashboards, following the example of <a href="https://thoughtbot.com/blog/sandi-metz-rules-for-developers#only-instantiate-one-object-in-the-controller">thoughtbot</a>. I could have perfectly used a scope instead, as these dashboards only include single-line methods, but once again the idea was to show the pattern in use. These dashboards are also used in the enrollment form object as default keyword arguments, where they can be overriden using dependency injection.</p>
+</li><li>
+<p><strong>Form object</strong>: for <code>new</code> and <code>create</code> actions in this case, usually also for <code>edit</code> and <code>update</code> actions when needed. Instead of using gems that provide similar functionality, I&#39;ve been making use of custom objects inspired by (read: stolen from) <a href="http://stratus3d.com/blog/2015/04/04/extensible-rails-4-form-object-design/">this post</a>.</p>
+</li></ul>
+
+<h2 id="label-Testing">Testing</h2>
+
+<p>I normally use the <a href="https://thoughtbot.com/blog/four-phase-test">Four-Phase Test pattern</a> to organize code in tests, except for the teardown phase, which is not usually explicitly required.</p>
+
+<p>I also find it very useful in tests to follow a <a href="https://thoughtbot.com/blog/the-case-for-wet-tests">WET (Write Everything Twice)</a> approach instead of the famous DRY (Don&#39;t Repeat Yourself) for everything, thus avoiding the appearance of mystery guests, among other things. In this project I use both approaches, depending on the complexity of the test itself.</p>
+
+<p>This project has a coverage greater than 99%, according to <a href="https://github.com/simplecov-ruby/simplecov">SimpleCov</a>, although I am not a big fan of this type of tool, since it doesn&#39;t mean that the code is well tested.</p>
+
+<p>After each push to the <code>main</code> branch, a build is triggered on Travis CI.</p>
+
+<h2 id="label-Code">Code</h2>
+
+<p>I&#39;ve used the provided Rubocop configuration to write the code. The only changes added to that file are:</p>
+<ul><li>
+<p>Capybara aliases for feature specs have been enabled: feature, background, given, etc.</p>
+</li><li>
+<p>Files <code>lib/tasks/*</code> and <code>Guardfile</code> have been excluded from some specific cops.</p>
+</li></ul>
+
+<p>Currently in the code there is no offense detected.</p>
+
+<p>I&#39;ve added little documentation in this code, because I prefer self-documenting code, with good variable, method and class names. However, if the team prefers to have everything documented or if it is necessary to document the reason for a given change, I usually use <a href="https://yardoc.org/">YARD</a>. There are examples of this documentation in form objects.</p>
+
+<h2 id="label-Version+control">Version control</h2>
+
+<p>In this project I haven&#39;t used branches. Usually the approach I follow is similar to the one proposed by <a href="https://nvie.com/posts/a-successful-git-branching-model/">gitflow</a>. Besides the typical GitHub workflow of pull requests and code reviews before merging the changes.</p>
+
+<p>Regarding commits, I follow the recommendations of <a href="https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">Tim Pope’s famous post</a> and <a href="https://thoughtbot.com/blog/5-useful-tips-for-a-better-commit-message">thoughtbot</a>. I also include the references that have helped me to develop a given feature.</p>
+
+<p>In this case, there is no commit that needed much explanation.</p>
+
+<h2 id="label-Performance">Performance</h2>
+<ul><li>
+<p>Use of <a href="https://github.com/flyerhzm/bullet">Bullet</a> gem to avoid N + 1 queries, among other things.</p>
+</li><li>
+<p>Use of counter cache to keep track of resources&#39; votes, as suggested by the gem <a href="https://github.com/ryanto/acts_as_votable#caching">acts_as_votable</a>.</p>
+</li><li>
+<p>Use of indexes in the database tables for the columns usually used in queries.</p>
+</li></ul>
+
+<h2 id="label-TODO">TODO</h2>
+<ul><li>
+<p>The button to vote for teachers or courses could disappear once the teacher already voted for a given resource.</p>
+</li><li>
+<p>I haven&#39;t added a single JS line. For example, buttons meant to vote for teachers or courses could use UJS to avoid a full page reload.</p>
+</li><li>
+<p>Extract duplication from form objects.</p>
+</li><li>
+<p>Extract duplicated markup to display resources&#39; votes.</p>
+</li><li>
+<p>Include only needed modules from Semantic UI.</p>
+</li><li>
+<p>Change the database for production environment. In development and test environments SQLite is used.</p>
+</li><li>
+<p>Deploy to production.</p>
+</li></ul>
+</div></div>
+
+      <div id="footer">
+  Generated on Fri Oct 30 09:37:37 2020 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.25 (ruby-2.7.2).
+</div>
+
+    </div>
+  </body>
+</html>
